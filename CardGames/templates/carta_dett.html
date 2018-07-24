@@ -4,14 +4,14 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Carte</title>
+        <title>{{ carta }}</title>
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     </head>
 
     <body>
 
         <h1>
-            <p align="center">Carte <img src="{% static 'image/10D.jpg' %}" width="100", height="100"> </p>
+            <p align="center">{{ carta }} </p>
         </h1>
 
 
@@ -30,7 +30,7 @@
 
             </thead>
 
-            {% for carta in carte %}
+
                 <tr>
 
                     <td> {{ carta }} </td>
@@ -40,7 +40,7 @@
                     <td> {{ carta.tipo }} </td>
 
                 </tr>
-            {% endfor %}
+
 
         </table>
 
