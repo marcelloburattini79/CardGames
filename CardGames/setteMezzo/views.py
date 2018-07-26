@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 from django.shortcuts import render
 from .models import Carta
+from django.http import Http404
 
 def home(request):
 
@@ -13,6 +14,9 @@ def home(request):
 
 def carta_dett(request, pk):
 
-    carta = Carta.objects.get(id=pk)
+    try:
+        carta = Carta.objects.get(id=pk)
+    except:
+        raise Http404
 
     return render(request, 'carta_dett.html', {'carta': carta})

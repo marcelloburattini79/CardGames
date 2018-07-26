@@ -8,7 +8,6 @@ class seme(models.Model):
 
     colore = models.CharField(max_length=50)
 
-
     def __str__(self):
         return self.colore
 
@@ -18,7 +17,6 @@ class Carta(models.Model):
     value = models.IntegerField("Valore")
 
     tipo = models.ForeignKey(seme, on_delete = models.CASCADE, related_name='carta')
-
 
     def __str__(self):
 

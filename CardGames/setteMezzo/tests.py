@@ -1,6 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse, resolve
-from .views import home
+from .views import home, carta_dett
 from .models import Carta, seme
 
 # Create your tests here.
@@ -19,11 +19,20 @@ class HomeTests(TestCase):
 class setteMezzoCarteTests(TestCase):
 
     def setUp(self):
-        seme1 = seme.objects.create(value=2, colore="Spade")
-        Carta.objects.create(value=1, tipo=seme1)
+        seme_carta = seme.objects.create(value=2, colore="Spade")
+        Carta.objects.create(value=1, tipo=seme_carta)
 
-    def test_board_topics_view_success_status_code(self):
+    def test_carta_dett_view_success_status_code(self):
         url = reverse('carta', kwargs={'pk': 1})
         response = self.client.get(url)
         self.assertEquals(response.status_code, 200)
+
+    def test_carta_dett_view_not_found_status_code(self):
+        url = reverse('carta', kwargs={'pk': 99})
+        response = self.client.get(url)
+        self.assertEquals(response.status_code, 404)
+
+    def test_carta_dett_url_resolves_carta_dett_view(self):
+        view = resolve('/carta/1')
+        self.assertEquals(view.func, carta_dett)
 
