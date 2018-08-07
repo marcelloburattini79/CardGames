@@ -10,6 +10,12 @@
 
     {% block content %}
 
+        <!-- Bottone per un new topic -->
+        <div class="mb-4">
+            <a href="{% url 'new_topic' carta.pk %}" class="btn btn-primary">New topic</a>
+        </div>
+
+        <!-- Elenco dei dettagli carta -->
         <ul class="list-group">
 
             <li class="list-group-item"> Nome: {{ carta }} </li>
@@ -19,6 +25,33 @@
             <li class="list-group-item"> Seme: {{ carta.tipo }} </li>
 
         </ul>
+
+        <!-- Topic associati alla carta -->
+        <table class="table">
+
+        <thead class="thead-inverse">
+          <tr>
+            <th>Topic</th>
+            <th>Starter</th>
+            <th>Replies</th>
+            <th>Views</th>
+            <th>Last Update</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for topic in carta.topics.all %}
+            <tr>
+              <td>{{ topic.subject }}</td>
+              <td>{{ topic.starter.username }}</td>
+              <td>0</td>
+              <td>0</td>
+              <td>{{ topic.last_updated }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+
+        </table>
 
     {% endblock content %}
 
