@@ -3,5 +3,5 @@ from django.shortcuts import render
 from .forms import SignUpForm
 
 def signup(request):
-    form = SignUpForm()
+    form = UserCreationForm()
     return render(request, 'signup.html', {'form': form})
