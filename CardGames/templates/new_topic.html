@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% load widget_tweaks %}
+
 {% block title %}Inserisci un commento{% endblock %}
 
 {% block breadcrumb %}
@@ -9,9 +11,10 @@
 {% endblock %}
 
 {% block content %}
-<form method="post">
+
+    <form method="post" novalidate>
     {% csrf_token %}
-    {{ form.as_p }}
+    {% include 'includes/form.html' %}
     <button type="submit" class="btn btn-success">Post</button>
-  </form>
+    </form>
 {% endblock %}

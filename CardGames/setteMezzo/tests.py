@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.urls import reverse, resolve
 from .views import home, carta_dett, new_topic
 from .models import Carta, seme, Topic, Post
+from .forms import NewTopicForm
 from django.contrib.auth.models import User
 
 # Create your tests here.
@@ -103,7 +104,9 @@ class NewTopicTests(TestCase):
         '''
         url = reverse('new_topic', kwargs={'pk': 1})
         response = self.client.post(url, {})
+        form = response.context.get('form')
         self.assertEquals(response.status_code, 200)
+        self.assertTrue(form.errors)
 
     def test_new_topic_invalid_post_data_empty_fields(self):
         '''
@@ -119,4 +122,10 @@ class NewTopicTests(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertFalse(Topic.objects.exists())
         self.assertFalse(Post.objects.exists())
+
+    def test_contains_form(self):
+        url = reverse('new_topic', kwargs={'pk': 1})
+        response = self.client.get(url)
+        form = response.context.get('form')
+        self.assertIsInstance(form, NewTopicForm)
 

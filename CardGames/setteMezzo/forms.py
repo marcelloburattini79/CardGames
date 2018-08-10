@@ -12,4 +12,4 @@ class NewTopicForm(forms.ModelForm):
 
     class Meta:
         model = Topic
-        fields = ['subject', 'message']
+        fields = ['subject', 'message',]
